@@ -8,7 +8,7 @@
             e.preventDefault();
             var name = $('#search').val();
             name = encodeURIComponent(name);
-            $('#results').load("http://www.tickets.local/busstop/FindBusStop?name=" + name);
+            $('#results').load("/busstop/FindBusStop?name=" + name);
         });
     });
 </script>

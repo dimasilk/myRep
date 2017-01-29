@@ -51,7 +51,7 @@
             var till = $('#till').val();
             till = encodeURIComponent(till);
 
-            $('#results').load("http://www.tickets.local/voyage/ApplyFilter?" +
+            $('#results').load("/voyage/ApplyFilter?" +
                 "idDepartureStop=" + idDepartureStop +
                 "&idArrivalStop=" + idArrivalStop +
                 "&from=" + from +

@@ -1,0 +1,70 @@
+﻿@model OmertexBusTicketsSystem.BL.SearchFilters.VoyagesSearchFilters
+
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>jQuery UI Datepicker - Default functionality</title>
+
+   
+
+    <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+    <script>
+        $(function() {
+            var $j = jQuery.noConflict();
+            $j("#datepicker").datepicker();
+        });
+    </script>
+</head>
+
+<body>
+
+<p>
+    Departure Stop
+
+    @Html.DropDownList("idDepartureStop", ViewBag.stops as SelectList)
+</p>
+<p>
+    Arrival Stop
+    @Html.DropDownList("idArrivalStop", ViewBag.stops as SelectList)
+</p>
+<input type="datetime" id="from" name="from">
+
+<input type="datetime" id="till" name="till">
+
+<input type='button' id="submit" value='Поиск'/>
+<div id="results"></div>
+
+
+<p>Date: <input type="text" id="datepicker">
+</p>
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js" type="text/javascript"></script>
+<script type="text/javascript">
+    $(document).ready(function() {
+        $('#submit').click(function(e) {
+            e.preventDefault();
+            var idDepartureStop = $('#idDepartureStop').val();
+            idDepartureStop = encodeURIComponent(idDepartureStop);
+
+            var idArrivalStop = $('#idArrivalStop').val();
+            idArrivalStop = encodeURIComponent(idArrivalStop);
+
+            var from = $('#from').val();
+            from = encodeURIComponent(from);
+
+            var till = $('#till').val();
+            till = encodeURIComponent(till);
+
+            $('#results').load("http://www.tickets.local/voyage/ApplyFilter?" +
+                "idDepartureStop=" + idDepartureStop +
+                "&idArrivalStop=" + idArrivalStop +
+                "&from=" + from +
+                "&till=" + till
+            );
+        });
+    });
+</script>
+</body>
+</html>

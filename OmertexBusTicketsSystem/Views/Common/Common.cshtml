@@ -1,0 +1,115 @@
+﻿@using System.Web.Mvc;
+@using System.Web.Mvc.Html;
+@using System.Linq.Expressions;
+@using HtmlHelper = System.Web.Mvc.HtmlHelper;
+@functions
+{
+    public static HelperResult DatePickerFor<TModel>(HtmlHelper<TModel> html, Expression<Func<TModel, DateTime?>> exp, object htmlAttributes = null, int numberOfMonths = 1, Expression<Func<TModel, DateTime?>> relatedExpression = null, bool to = false, int? minDate = null)
+    {
+        return DatePicker(html, html.IdFor(exp), html.TextBoxFor(exp, "{0:MM/dd/yyyy}", htmlAttributes), numberOfMonths, relatedExpression == null ? null : html.IdFor(relatedExpression), to, minDate);
+    }
+    public static HelperResult DatePickerFor<TModel>(HtmlHelper<TModel> html, string id, Expression<Func<TModel, DateTime?>> exp, object htmlAttributes = null, int numberOfMonths = 1)
+    {
+        return DatePicker(html, new HtmlString(id), html.TextBoxFor(exp, "{0:MM/dd/yyyy}", htmlAttributes), numberOfMonths);
+    }
+    public static HelperResult MonthYearPickerFor<TModel>(HtmlHelper<TModel> html, string id, Expression<Func<TModel, DateTime?>> exp, object htmlAttributes = null)
+    {
+        return MonthYear(html, new HtmlString(id), html.TextBoxFor(exp, "{0:MMMM yyyy}", htmlAttributes));
+    }
+    public static HelperResult DateTimePickerFor<TModel>(HtmlHelper<TModel> html, Expression<Func<TModel, DateTime?>> exp, object htmlAttributes = null)
+    {
+        return DateTimePicker(html, html.IdFor(exp), html.TextBoxFor(exp, "{0:MM/dd/yyyy hh:mm tt}", htmlAttributes));
+    }
+
+    public static HelperResult DateTimePickerFor<TModel>(HtmlHelper<TModel> html, string id, Expression<Func<TModel, DateTime?>> exp, object htmlAttributes = null)
+    {
+        return DateTimePicker(html, new HtmlString(id), html.TextBoxFor(exp, "{0:MM/dd/yyyy hh:mm tt}", htmlAttributes));
+    }
+
+    public static string GetFormLabelCssClass()
+    {
+        return "col-lg-2 col-md-3 control-label";
+    }
+
+    public static string GetFormFieldContCssClass()
+    {
+        return "col-lg-5 col-md-8";
+    }
+
+    public static string GetFormFieldContCssClassWithActionsOnRight()
+    {
+        return "col-lg-6 col-md-9";
+    }
+}
+@helper DatePicker(HtmlHelper html, IHtmlString id, IHtmlString textbox, int numberOfMonths = 1, IHtmlString relatedControlId = null, bool to = false, int? minDate = null, bool showCalendar = true)
+{
+    @textbox
+    <script type="text/javascript">
+	$("#@id").datepicker({
+		defaultDate: "-1w",
+		changeMonth: true,
+		numberOfMonths: @numberOfMonths,
+		@if (relatedControlId != null && to)
+			{<text> onClose: function(selectedDate) { $("#@relatedControlId").datepicker("option", "maxDate", selectedDate); },</text>}
+		@if (relatedControlId != null && !to)
+			{<text> onClose: function(selectedDate) { $("#@relatedControlId").datepicker("option", "minDate", selectedDate); },</text>}
+		@if(minDate.HasValue)
+			{<text> minDate: @minDate.Value,</text>}
+			prevText: '<i class="fa fa-chevron-left"></i>',
+			nextText: '<i class="fa fa-chevron-right"></i>',
+			beforeShow: function(i) { if ($(i).attr('readonly')) { return false; } $('#ui-datepicker-div').removeClass('hide-calendar'); },
+			onSelect: function (dateText, obj) { $("#@id").change(); }
+		});
+    </script>
+}
+@helper DateTimePicker(HtmlHelper html, IHtmlString id, IHtmlString textbox)
+{
+    @textbox
+    <script type="text/javascript">
+		$("#@id").datetimepicker({
+			showHour: true,
+			showMinute: true,
+			showTimepicker: true,
+			timeFormat: 'hh:mm TT',
+			beforeShow: function(i) { if ($(i).attr('readonly')) { return false; } $('#ui-datepicker-div').removeClass('hide-calendar'); }
+		});
+    </script>
+}
+@helper MonthYear(HtmlHelper html, IHtmlString id, IHtmlString textbox)
+{
+    @textbox
+    <script type="text/javascript">
+	$("#@id").datepicker({
+		prevText: '<i class="fa fa-chevron-left"></i>',
+		nextText: '<i class="fa fa-chevron-right"></i>',
+		changeMonth: true,
+		changeYear: true,
+		showButtonPanel: true,
+		dateFormat: 'MM yy',
+		beforeShow: function(a, values){
+			if ($(a).attr('readonly')) {
+				return false;
+			}
+			$('#ui-datepicker-div').toggleClass('hide-calendar', true);
+
+			var v = $(a).val();
+			if(v){
+				var d = new Date(Date.parse("01 " + v));
+				$(this).datepicker('option', 'monthNames');
+				$(this).datepicker('option', 'defaultDate', d);
+				$(this).datepicker('setDate', d);
+			}
+		},
+		onClose: function(dateText, inst) {
+
+			var done = ($('#ui-datepicker-div').html().indexOf('ui-datepicker-close ui-state-default ui-priority-primary ui-corner-all ui-state-hover') > -1);
+			if(!done && $(this).val().length === 0)
+				return;
+
+			var month = $("#ui-datepicker-div .ui-datepicker-month :selected").val();
+			var year = $("#ui-datepicker-div .ui-datepicker-year :selected").val();
+			$(this).datepicker('setDate', new Date(year, month, 1));
+		}
+	});
+    </script>
+}

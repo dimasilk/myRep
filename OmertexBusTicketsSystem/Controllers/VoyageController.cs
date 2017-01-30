@@ -66,6 +66,7 @@ namespace OmertexBusTicketsSystem.Controllers
             return View();
         }
 
+        [Authorize]
         // GET: Voyage/Details/5
         public ActionResult ReserveTickets(int id)
         {
@@ -81,7 +82,7 @@ namespace OmertexBusTicketsSystem.Controllers
             
             return View(models);
         }
-        
+        [Authorize]
         [HttpPost]
         public ActionResult ReserveTickets(FormCollection collection)
         {

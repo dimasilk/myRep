@@ -7,6 +7,7 @@
     [info] NVARCHAR(50) NULL, 
     [Id_Order] INT NULL, 
     [Id_User] NVARCHAR(128) NULL, 
+    [SeatNumber] INT NULL, 
     CONSTRAINT [FK_Ticket_Status] FOREIGN KEY ([Id_Status]) REFERENCES [TicketStatus]([Id]),
 	CONSTRAINT [FK_Ticket_Passenger] FOREIGN KEY ([Id_Passenger]) REFERENCES [Passenger]([Id]),
 	CONSTRAINT [FK_Ticket_SpecVoyage] FOREIGN KEY ([Id_SpecifiedVoyage]) REFERENCES [SpecifiedVoyage]([Id]), 

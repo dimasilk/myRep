@@ -17,7 +17,7 @@ namespace OmertexBusTicketsSystem.BL.VoyageService
         {
             using (var c = new OmertexTicketsDBEntities())
             {
-                var temp = c.SpecifiedVoyage.Find(id);
+                var temp = c.SpecifiedVoyage.Include("BusstopArrival").Include("BusstopDeparture").SingleOrDefault(x=>x.Id == id);
 
                 if (temp != null) return new VoyageDto(temp);
             }

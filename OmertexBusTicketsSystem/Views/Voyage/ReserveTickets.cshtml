@@ -7,13 +7,12 @@
 <h2>ReserveTickets</h2>
 
 
-
-<table class="table">
-    <tr>
-        <th></th>
-    </tr>
-
-@foreach (var item in Model) {
+@using (Html.BeginForm("Index", "Home"))
+{
+    <table width="100%">
+        
+@foreach (var item in Model)
+{
     <tr>
         <td>
             @Html.CheckBoxFor(m => item.Checked)
@@ -26,5 +25,16 @@
         </td>
     </tr>
 }
+        <tr>
+            <td>
+                <input type="submit" value="Submit" />
+            </td>
+        </tr>
+        <tr>
+            <td>
+                @ViewBag.Country
+            </td>
+        </tr>
+    </table>
+}
 
-</table>

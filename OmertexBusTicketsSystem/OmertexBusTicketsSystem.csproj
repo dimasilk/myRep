@@ -243,6 +243,7 @@
     <Compile Include="ViewModelsFactories\VoyagesFactory.cs" />
     <Compile Include="ViewModels\BusStopModel.cs" />
     <Compile Include="ViewModels\TickedAdvancedViewModel.cs" />
+    <Compile Include="ViewModels\TicketsContainerViewModel.cs" />
     <Compile Include="ViewModels\TicketSimpleViewModel.cs" />
     <Compile Include="ViewModels\VoyageViewModel.cs" />
   </ItemGroup>
@@ -393,12 +394,12 @@
     <Content Include="Views\Common\Common.cshtml" />
     <Content Include="Views\Voyage\ApplyFilter.cshtml" />
     <Content Include="Views\Voyage\ReserveTickets.cshtml" />
+    <Content Include="Views\Tickets\Edit.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Filters\" />
     <Folder Include="Infrastructure\Interfaces\" />
-    <Folder Include="Views\Tickets\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff" />

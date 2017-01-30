@@ -23,26 +23,44 @@ namespace OmertexBusTicketsSystem.BL.DTO
             {
                 Passenger = new PassengerDto(ticket.Passenger);
             }
-            Info = ticket.info;
             
+            if (ticket.Id_User != null)
+            {
+                UserId = ticket.Id_User;
+            }
+
             if (ticket.TicketStatus != null)
             {
                 Status = new StatusDto(ticket.TicketStatus);
             }
+
+            if (ticket.Order != null)
+            {
+                Order = new OrderDto(ticket.Order);
+            }
+            Info = ticket.info;
+            SeatNumber = ticket.SeatNumber.Value;
+            
         }
         public int Id;
         public VoyageDto Voyage;
         public PassengerDto Passenger;
         public StatusDto Status;
+        public OrderDto Order;
         public string Info;
         public int SeatNumber;
+        public string UserId;
+
         internal virtual void CopyTo(Ticket ticket)
         {
             ticket.Id = Id;
-            if (Passenger != null) Passenger.CopyTo(ticket.Passenger);
-            if (Status != null) Status.CopyTo(ticket.TicketStatus);
-            if (Voyage != null) Voyage.CopyTo(ticket.SpecifiedVoyage);
+            if (Passenger != null) ticket.Id_Passenger = Passenger.Id; //Passenger.CopyTo(ticket.Passenger);
+            if (Status != null) ticket.Id_Status = Status.Id; //Status.CopyTo(ticket.TicketStatus);
+            if (Voyage != null) ticket.Id_SpecifiedVoyage = Voyage.Id;
+            if (Order != null) ticket.Id_Order = Order.Id;//Voyage.CopyTo(ticket.SpecifiedVoyage);
             ticket.info = Info;
+            ticket.Id_User = UserId;
+            ticket.SeatNumber = SeatNumber;
         }
     }
 }

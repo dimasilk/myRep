@@ -24,7 +24,7 @@ namespace OmertexBusTicketsSystem.BL.DTO
 
         }
 
-        int Id;
+        public int Id;
         public string Firstname;
         public string Surname;
         public DateTime? Birthdate;

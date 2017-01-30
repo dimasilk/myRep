@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using Microsoft.AspNet.Identity;
+using OmertexBusTicketsSystem.BL.DTO;
 using OmertexBusTicketsSystem.BL.Interfaces;
 using OmertexBusTicketsSystem.BL.SearchFilters;
 using OmertexBusTicketsSystem.ViewModels;
@@ -17,10 +19,11 @@ namespace OmertexBusTicketsSystem.Controllers
         private readonly IBusStopService _busStopService;
         private readonly IBusStopsFactory _busStopsFactory;
         private readonly ITicketService _ticketService;
-        public readonly ITicketsFactory _ticketsFactory;
+        private readonly ITicketsFactory _ticketsFactory;
+        private readonly IOrderService _orderService;
         public VoyageController() { }
 
-        public VoyageController(IVoyagesFactory voyagesFactory, IVoyageService voyageService, IBusStopService busStopService, IBusStopsFactory busStopsFactory, ITicketService ticketService, ITicketsFactory ticketsFactory)
+        public VoyageController(IVoyagesFactory voyagesFactory, IVoyageService voyageService, IBusStopService busStopService, IBusStopsFactory busStopsFactory, ITicketService ticketService, ITicketsFactory ticketsFactory, IOrderService orderService)
         {
             _voyageService = voyageService;
             _voyagesFactory = voyagesFactory;
@@ -28,6 +31,7 @@ namespace OmertexBusTicketsSystem.Controllers
             _busStopsFactory = busStopsFactory;
             _ticketService = ticketService;
             _ticketsFactory = ticketsFactory;
+            _orderService = orderService;
         }
         [Authorize]
         public ActionResult SearchVoyages()
@@ -70,27 +74,37 @@ namespace OmertexBusTicketsSystem.Controllers
         // GET: Voyage/Details/5
         public ActionResult ReserveTickets(int id)
         {
-            var res = _ticketService.GetFreeTicketsByVoyageId(id);
+            var temp = _ticketService.GetFreeTicketsByVoyageId(id);
             List<TicketSimpleViewModel> models = new List<TicketSimpleViewModel>();
-            foreach (var element in res)
+            foreach (var element in temp)
             {
                 models.Add(_ticketsFactory.GetSimple(element));
             }
+            TicketsContainerViewModel result = _ticketsFactory.GetModels(models);
             var voyage = _voyageService.GetVoyageById(id);
             var voyageView = _voyagesFactory.Get(voyage);
             ViewBag.voyage = voyageView;
             
-            return View(models);
+            return View(result);
         }
         [Authorize]
         [HttpPost]
-        public ActionResult ReserveTickets(FormCollection collection)
+        public ActionResult ReserveTickets(TicketsContainerViewModel containerViewModel)
         {
             try
             {
-                // TODO: Add update logic here
-
-                return RedirectToAction("Index");
+                OrderDto order = new OrderDto();
+                List<TicketDto> myList = new List<TicketDto>();
+                foreach (var element in containerViewModel.TicketSimple)
+                {
+                    if (element.Checked == true) myList.Add(_ticketsFactory.GeTicketDto(element));
+                }
+                order.UserId = User.Identity.GetUserId();
+                order.Tickets = myList;
+                
+               _orderService.MakeOrder(order);
+               // _ticketService.ReserveTickets(myList, UserId);
+                return RedirectToAction("Index","Home");
             }
             catch
             {

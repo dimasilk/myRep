@@ -55,13 +55,16 @@ using System.Linq;
 
 <#=Accessibility.ForType(container)#> partial class <#=code.Escape(container)#> : DbContext
 {
-   public <#=code.Escape(container)#>()
+    public <#=code.Escape(container)#>()
         : base("name=<#=container.Name#>")
     {
-  this.Configuration.LazyLoadingEnabled = false;
-        
 <#
-
+if (!loader.IsLazyLoadingEnabled(container))
+{
+#>
+        this.Configuration.LazyLoadingEnabled = false;
+<#
+}
 
 foreach (var entitySet in container.BaseEntitySets.OfType<EntitySet>())
 {

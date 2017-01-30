@@ -21,6 +21,7 @@ namespace OmertexBusTicketsSystem.BL.DataModel
         public string info { get; set; }
         public Nullable<int> Id_Order { get; set; }
         public string Id_User { get; set; }
+        public Nullable<int> SeatNumber { get; set; }
     
         public virtual Order Order { get; set; }
         public virtual Passenger Passenger { get; set; }

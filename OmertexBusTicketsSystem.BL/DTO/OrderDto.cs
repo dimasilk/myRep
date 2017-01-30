@@ -18,21 +18,21 @@ namespace OmertexBusTicketsSystem.BL.DTO
             Status = new StatusDto(order.OrderStatus);
             
             //Tickets = order.
-            //UserId = order.Id_User;
+            UserId = order.Id_User;
         }
         public int Id;
         public VoyageDto Voyage;
         public StatusDto Status;
         public string UserId;
-        public IEnumerable<TicketDto> Tickets;
+        public List<TicketDto> Tickets;
 
         internal virtual void CopyTo(Order order)
         {
             order.Id = Id;
-            //order.Id_User = UserId
+            order.Id_User = UserId;
             //tickets
-            if(Status != null) Status.CopyTo(order.OrderStatus);
-            if (Voyage != null) Voyage.CopyTo(order.SpecifiedVoyage);
+            if (Status != null) order.Id_Status = Status.Id; //Status.CopyTo(order.OrderStatus);
+            if (Voyage != null) order.Id_SpecifiedVoyage = Voyage.Id; //Voyage.CopyTo(order.SpecifiedVoyage);
         }
     }
 }

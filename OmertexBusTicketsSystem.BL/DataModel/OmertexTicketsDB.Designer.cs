@@ -1,4 +1,4 @@
-﻿// Создание кода T4 для модели "C:\Users\Dima\AppData\Roaming\Skype\My Skype Received Files\OmertexBusTicketsSystem\OmertexBusTicketsSystem.BL\DataModel\OmertexTicketsDB.edmx" включено. 
+﻿// Создание кода T4 для модели "C:\Users\Dima\Source\Repos\myRepository\OmertexBusTicketsSystem.BL\DataModel\OmertexTicketsDB.edmx" включено. 
 // Чтобы включить формирование кода прежних версий, измените значение свойства "Стратегия создания кода" конструктора
 // на "Legacy ObjectContext". Это свойство доступно в окне "Свойства", если модель
 // открыта в конструкторе.

@@ -15,13 +15,13 @@ namespace OmertexBusTicketsSystem.BL.DataModel
     
     public partial class OmertexTicketsDBEntities : DbContext
     {
-       public OmertexTicketsDBEntities()
+        public OmertexTicketsDBEntities()
             : base("name=OmertexTicketsDBEntities")
         {
-      this.Configuration.LazyLoadingEnabled = false;
-            
+            this.Configuration.LazyLoadingEnabled = false;
+
         }
-    
+
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
             throw new UnintentionalCodeFirstException();

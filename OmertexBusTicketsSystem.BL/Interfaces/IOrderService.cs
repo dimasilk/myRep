@@ -10,10 +10,10 @@ namespace OmertexBusTicketsSystem.BL.Interfaces
     public interface IOrderService
     {
         OrderDto GetOrderById(int id);
-        void DeleteOrder(int busStopId);
-        void UpdateOrder(OrderDto busStopModel);
-        void AddOrder(OrderDto busStopModel);
-        void MakeOrder(IEnumerable<TicketDto> tickets);
+        void DeleteOrder(int order);
+        void UpdateOrder(OrderDto orderDto);
+        void AddOrder(OrderDto orderDto);
+        void MakeOrder(OrderDto orderDto);
         IEnumerable<OrderDto> GetOrdersByUserId(string userId);
     }
 }

@@ -127,6 +127,7 @@
           <Property Name="info" Type="nvarchar" MaxLength="50" />
           <Property Name="Id_Order" Type="int" />
           <Property Name="Id_User" Type="nvarchar" MaxLength="128" />
+          <Property Name="SeatNumber" Type="int" />
         </EntityType>
         <EntityType Name="TicketStatus">
           <Key>
@@ -504,6 +505,7 @@
           <Property Name="info" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="Id_Order" Type="Int32" />
           <Property Name="Id_User" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
+          <Property Name="SeatNumber" Type="Int32" />
           <NavigationProperty Name="Order" Relationship="Self.FK_Ticket_Order" FromRole="Ticket" ToRole="Order" />
           <NavigationProperty Name="Passenger" Relationship="Self.FK_Ticket_Passenger" FromRole="Ticket" ToRole="Passenger" />
           <NavigationProperty Name="SpecifiedVoyage" Relationship="Self.FK_Ticket_SpecVoyage" FromRole="Ticket" ToRole="SpecifiedVoyage" />
@@ -846,6 +848,7 @@
                 <ScalarProperty Name="info" ColumnName="info" />
                 <ScalarProperty Name="Id_Order" ColumnName="Id_Order" />
                 <ScalarProperty Name="Id_User" ColumnName="Id_User" />
+                <ScalarProperty Name="SeatNumber" ColumnName="SeatNumber" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

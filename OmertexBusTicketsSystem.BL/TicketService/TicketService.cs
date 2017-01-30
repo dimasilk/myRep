@@ -15,8 +15,8 @@ namespace OmertexBusTicketsSystem.BL.TicketService
         {
             using (var c = new OmertexTicketsDBEntities())
             {
-                var temp = c.Ticket.Find(id);
-
+                var temp = c.Ticket.Include("TicketStatus")
+                    .SingleOrDefault(x => x.Id == id); 
                 if (temp != null) return new TicketDto(temp);
             }
             return null;
@@ -29,7 +29,19 @@ namespace OmertexBusTicketsSystem.BL.TicketService
 
         public void UpdateTicket(TicketDto ticketDto)
         {
-            throw new NotImplementedException();
+            using (var c = new OmertexTicketsDBEntities())
+            {
+                var temp = c.Ticket.Include("TicketStatus")
+                    .Include("Order")
+                    .Include("Passenger")
+                    .Include("SpecifiedVoyage")
+                  .SingleOrDefault(x => x.Id == ticketDto.Id);
+               
+                ticketDto.CopyTo(temp);
+                c.Entry(temp).State = System.Data.Entity.EntityState.Modified;
+                c.SaveChanges();
+                return;
+            }
         }
 
         public void AddTicket(TicketDto ticketDto)
@@ -47,8 +59,32 @@ namespace OmertexBusTicketsSystem.BL.TicketService
             using (var c = new OmertexTicketsDBEntities())
             {
                 var temp = c.Ticket.Where(x => x.Id_SpecifiedVoyage == voyageId).Where(x=>x.Id_Status == 1).ToList();
-                return temp?.Select(x => new TicketDto(x)).ToList(); ;
+                return temp?.Select(x => new TicketDto(x)).ToList(); 
             }
+        }
+
+        public void ReserveTickets(List<TicketDto> list, string userId)
+        {
+            int VoyageId = 0;
+            foreach (var element in list)
+            {
+                var ticket = GetTicketById(element.Id);
+               // if(VoyageId == 0) VoyageId = ticket.
+                ticket.Status.Id = 2;
+                ticket.Status.Name = "Reserved";
+                ticket.UserId = userId;
+                UpdateTicket(ticket);
+            }
+        }
+
+        public int GetVoyageIdByTicketId(int ticketId)
+        {
+            using (var c = new OmertexTicketsDBEntities())
+            {
+                var temp = c.Ticket.SingleOrDefault(x => x.Id == ticketId);
+                if (temp != null) return (int)temp.Id_SpecifiedVoyage;
+            }
+            return 0;
         }
     }
 }

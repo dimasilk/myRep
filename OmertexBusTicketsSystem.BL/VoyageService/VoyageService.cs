@@ -38,6 +38,7 @@ namespace OmertexBusTicketsSystem.BL.VoyageService
         {
             throw new NotImplementedException();
         }
+        
 
         public IEnumerable<VoyageDto> GetVoyagesByFilter(VoyagesSearchFilters filter)
         {

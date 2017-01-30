@@ -7,11 +7,11 @@ namespace OmertexBusTicketsSystem.ViewModels
 {
     public class VoyageViewModel
     {
-        public int Id;
-        public string VoyageName;
-        public DateTime Departure;
-        public DateTime Arrival;
-        public string DepartureStop;
-        public string ArrivalStop;
+        public int Id { get; set; }
+        public string VoyageName { get; set; }
+        public DateTime Departure { get; set; }
+        public DateTime Arrival { get; set; }
+        public string DepartureStop { get; set; }
+        public string ArrivalStop { get; set; }
     }
 }

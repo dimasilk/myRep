@@ -15,7 +15,13 @@ namespace OmertexBusTicketsSystem.BL.VoyageService
     {
         public VoyageDto GetVoyageById(int id)
         {
-            throw new NotImplementedException();
+            using (var c = new OmertexTicketsDBEntities())
+            {
+                var temp = c.SpecifiedVoyage.Find(id);
+
+                if (temp != null) return new VoyageDto(temp);
+            }
+            return null;
         }
 
         public void DeleteVoyage(int voyageId)

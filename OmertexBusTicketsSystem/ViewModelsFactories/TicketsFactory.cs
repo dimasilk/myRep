@@ -16,7 +16,8 @@ namespace OmertexBusTicketsSystem.ViewModelsFactories
             {
                 Id =  dto.Id,
                 Info = dto.Info,
-                SeatNumber = dto.SeatNumber
+                SeatNumber = dto.SeatNumber,
+                Checked = false
             };
         }
 

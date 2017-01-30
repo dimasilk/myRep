@@ -7,11 +7,13 @@ using OmertexBusTicketsSystem.BL.DTO;
 
 namespace OmertexBusTicketsSystem.BL.Interfaces
 {
-    interface ITicketService
+    public interface ITicketService
     {
         TicketDto GetTicketById(int id);
         void DeleteTicket(int ticketId);
         void UpdateTicket(TicketDto ticketDto);
         void AddTicket(TicketDto ticketDto);
+        IEnumerable<TicketDto> GetTicketsByUser(string userId);
+        IEnumerable<TicketDto> GetFreeTicketsByVoyageId(int voyageId);
     }
 }

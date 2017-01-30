@@ -16,14 +16,18 @@ namespace OmertexBusTicketsSystem.Controllers
         private readonly IVoyageService _voyageService;
         private readonly IBusStopService _busStopService;
         private readonly IBusStopsFactory _busStopsFactory;
+        private readonly ITicketService _ticketService;
+        public readonly ITicketsFactory _ticketsFactory;
         public VoyageController() { }
 
-        public VoyageController(IVoyagesFactory voyagesFactory, IVoyageService voyageService, IBusStopService busStopService, IBusStopsFactory busStopsFactory)
+        public VoyageController(IVoyagesFactory voyagesFactory, IVoyageService voyageService, IBusStopService busStopService, IBusStopsFactory busStopsFactory, ITicketService ticketService, ITicketsFactory ticketsFactory)
         {
             _voyageService = voyageService;
             _voyagesFactory = voyagesFactory;
             _busStopService = busStopService;
             _busStopsFactory = busStopsFactory;
+            _ticketService = ticketService;
+            _ticketsFactory = ticketsFactory;
         }
         [Authorize]
         public ActionResult SearchVoyages()
@@ -63,19 +67,23 @@ namespace OmertexBusTicketsSystem.Controllers
         }
 
         // GET: Voyage/Details/5
-        public ActionResult Details(int id)
+        public ActionResult ReserveTickets(int id)
         {
-            return View();
+            var res = _ticketService.GetFreeTicketsByVoyageId(id);
+            List<TicketSimpleViewModel> models = new List<TicketSimpleViewModel>();
+            foreach (var element in res)
+            {
+                models.Add(_ticketsFactory.GetSimple(element));
+            }
+            var voyage = _voyageService.GetVoyageById(id);
+            var voyageView = _voyagesFactory.Get(voyage);
+            ViewBag.voyage = voyageView;
+            
+            return View(models);
         }
-
-        public ActionResult Edit(int id)
-        {
-            return View();
-        }
-
-        // POST: Tickets/Edit/5
+        
         [HttpPost]
-        public ActionResult Edit(int id, FormCollection collection)
+        public ActionResult ReserveTickets(FormCollection collection)
         {
             try
             {

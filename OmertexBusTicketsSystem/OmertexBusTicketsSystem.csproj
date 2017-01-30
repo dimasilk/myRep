@@ -392,6 +392,7 @@
     <Content Include="Views\Voyage\SearchVoyages.cshtml" />
     <Content Include="Views\Common\Common.cshtml" />
     <Content Include="Views\Voyage\ApplyFilter.cshtml" />
+    <Content Include="Views\Voyage\ReserveTickets.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

@@ -7,8 +7,9 @@ namespace OmertexBusTicketsSystem.ViewModels
 {
     public class TicketSimpleViewModel
     {
-        public int Id;
-        public string Info;
-        public int SeatNumber;
+        public int Id { get; set; }
+        public string Info { get; set; }
+        public int SeatNumber { get; set; }
+        public bool Checked { get; set; }
     }
 }

@@ -6,27 +6,35 @@
 
 <h2>ReserveTickets</h2>
 
+Voyage name: @ViewBag.voyage.VoyageName<br />
+Bus Stop Departure: @ViewBag.voyage.DepartureStop<br/>
+Departure Datetime: @ViewBag.voyage.Departure<br/>
+Bus Stop Arrival: @ViewBag.voyage.ArrivalStop<br/>
+Arrival Datetime: @ViewBag.voyage.Arrival<br />
+
+<br />
 
 @using (Html.BeginForm("ReserveTickets", "Voyage"))
 {
-    <table width="100%">
-        
-@for (int i = 0; i < Model.TicketSimple.Count; i++)
-{
-    <tr>
-        <td>
-            @Html.CheckBoxFor(m => Model.TicketSimple[i].Checked)
-            @Model.TicketSimple[i].SeatNumber.ToString()
-            @Html.HiddenFor(m => Model.TicketSimple[i].Id)
-            @Html.HiddenFor(m => Model.TicketSimple[i].Info)
+    <table width="50">
+        <thead>    Seat number in bus</thead>
 
-           
-        </td>
-    </tr>
-}
+        @for (int i = 0; i < Model.TicketSimple.Count; i++)
+        {
+            <tr>
+                <td>
+                    @Html.CheckBoxFor(m => Model.TicketSimple[i].Checked)
+                    @Model.TicketSimple[i].SeatNumber.ToString()
+                    @Html.HiddenFor(m => Model.TicketSimple[i].Id)
+                    @Html.HiddenFor(m => Model.TicketSimple[i].Info)
+
+
+                </td>
+            </tr>
+        }
         <tr>
             <td>
-                <input type="submit" value="Submit" />
+                <input type="submit" value="Submit"/>
             </td>
         </tr>
         <tr>

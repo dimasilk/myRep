@@ -1,14 +1,22 @@
 ﻿@model IEnumerable<OmertexBusTicketsSystem.ViewModels.BusStopModel>
 
+<br/>
 <table border="1">
+    <thead>
+    <tr>
+        <td><b>Bus Stop Name</b></td>
+        <td><b>Bus Stop Description</b></td>
+        <td><b>Bus Stop Status</b></td>
+    </tr>
+    </thead>
     @foreach (var item in Model)
     {
         <tr>
-           
+
             <td>@item.Name</td>
             <td>@item.Description</td>
             <td>@item.Status</td>
-            
+
         </tr>
     }
 </table>

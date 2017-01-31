@@ -6,45 +6,62 @@
 
 <h2>MyTickets</h2>
 
-@using (Html.BeginForm("MyTickets", "Tickets"))
-{<table class="table">
-     <tr>
-         <th>Reserved tickets</th>
-     </tr>
 
-     @for (int i = 0; i < Model.ReservedTickets.TicketAdvanced.Count; i++)
-     {
-         <tr>
-             <td>
+@using (Html.BeginForm("TicketPassenger", "Tickets"))
+{
+    <table width="100%">
 
-                 @Model.ReservedTickets.TicketAdvanced[i].VoyageName <br/>
-                 @Model.ReservedTickets.TicketAdvanced[i].DepartureDateTime<br/>
-                 @Model.ReservedTickets.TicketAdvanced[i].BusStopDepartureName<br/>
-                 @Model.ReservedTickets.TicketAdvanced[i].ArrivaDateTime<br/>
-                 @Model.ReservedTickets.TicketAdvanced[i].BusStopArrivalName<br/>
-                 @Model.ReservedTickets.TicketAdvanced[i].SeatNumber.ToString()<br/>
-                 @Model.ReservedTickets.TicketAdvanced[i].TicketCost.ToString()<br/>
-                 @Html.HiddenFor(m => Model.ReservedTickets.TicketAdvanced[i].Id)<br/>
-             </td>
-             <td>
-                 @Html.CheckBoxFor(m => Model.ReservedTickets.TicketAdvanced[i].Checked)
+        <th>Reserved tickets</th>
+        <tr>
 
-             </td>
-         </tr>
-     }
-     <tr>
-         <td>
-             <input type="submit" value="By tickets"/>
-         </td>
-     </tr>
-     }
+            <td>Info about tickets</td>
+            <td>Check tickets you want to buy</td>
+        </tr>
+        @for (int i = 0; i < Model.ReservedTickets.TicketAdvanced.Count; i++)
+        {
+            <tr>
+                <td>
+                    Specified voyage name: @Html.LabelFor(m => Model.ReservedTickets.TicketAdvanced[i].VoyageName, Model.ReservedTickets.TicketAdvanced[i].VoyageName)<br/>
+                    Departure datetime: @Html.LabelFor(m => Model.ReservedTickets.TicketAdvanced[i].DepartureDateTime, Model.ReservedTickets.TicketAdvanced[i].DepartureDateTime)<br/>
+                    Departure Bus Stop: @Html.LabelFor(m => Model.ReservedTickets.TicketAdvanced[i].BusStopDepartureName, Model.ReservedTickets.TicketAdvanced[i].BusStopDepartureName)<br/>
+                    Arrival datetime: @Html.LabelFor(m => Model.ReservedTickets.TicketAdvanced[i].ArrivaDateTime, Model.ReservedTickets.TicketAdvanced[i].ArrivaDateTime)<br/>
+                    Arrival Bus Stop: @Html.LabelFor(m => Model.ReservedTickets.TicketAdvanced[i].BusStopArrivalName, Model.ReservedTickets.TicketAdvanced[i].BusStopArrivalName)<br/>
 
- </table>
+                    Seat number: @Html.LabelFor(m => Model.ReservedTickets.TicketAdvanced[i].SeatNumber, Model.ReservedTickets.TicketAdvanced[i].SeatNumber.ToString())<br/>
+                    Ticket cost: @Html.LabelFor(m => Model.ReservedTickets.TicketAdvanced[i].TicketCost, Model.ReservedTickets.TicketAdvanced[i].TicketCost.ToString())<br/>
+
+                    @Html.HiddenFor(m => Model.ReservedTickets.TicketAdvanced[i].Id)<br/>
+                    @Html.HiddenFor(m => Model.ReservedTickets.TicketAdvanced[i].ArrivaDateTime)<br/>
+                    @Html.HiddenFor(m => Model.ReservedTickets.TicketAdvanced[i].BusStopArrivalName)<br/>
+                    @Html.HiddenFor(m => Model.ReservedTickets.TicketAdvanced[i].DepartureDateTime)<br/>
+                    @Html.HiddenFor(m => Model.ReservedTickets.TicketAdvanced[i].BusStopDepartureName)<br/>
+                    @Html.HiddenFor(m => Model.ReservedTickets.TicketAdvanced[i].SeatNumber)<br/>
+                    @Html.HiddenFor(m => Model.ReservedTickets.TicketAdvanced[i].VoyageName)<br/>
+                    @Html.HiddenFor(m => Model.ReservedTickets.TicketAdvanced[i].TicketCost)<br />
+                </td>
+                <td>
+                    @Html.CheckBoxFor(m => Model.ReservedTickets.TicketAdvanced[i].Checked)
+
+                </td>
+            </tr>
+        }
+        <tr>
+            <td>
+                <input type="submit" value="Buy" />
+            </td>
+        </tr>
+        }
+
+    </table>
+}
     <br/><br/><br/>
 
     <table class="table">
-        <tr>
-            <th>Reserved tickets</th>
+        <th>Bought tickets</th>
+         <tr>
+            
+            <td>Info about tickets</td>
+            <td>Info about passenger</td>
         </tr>
 
         @for (int i = 0; i < Model.BoughtTickets.TicketAdvanced.Count; i++)
@@ -70,11 +87,7 @@
             </tr>
         }
         <tr>
-            <td>
-                <input type="submit" value="Submit" />
-            </td>
         </tr>
-        }
+        
 
     </table>
-}

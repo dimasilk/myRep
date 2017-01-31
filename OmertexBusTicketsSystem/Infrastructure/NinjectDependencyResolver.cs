@@ -47,7 +47,7 @@ namespace WebApplication10.Infrastructure
             kernel.Bind<IOrderService>().To<OrderService>();
             kernel.Bind<IPassengerFactory>().To<PassengersFactory>();
             kernel.Bind<IPassengerService>().To<PassengerService>();
-            kernel.Bind<IOrderService>().To<OrderService>();
+            
 
 
         }

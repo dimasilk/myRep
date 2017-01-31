@@ -53,10 +53,13 @@ namespace OmertexBusTicketsSystem.BL.TicketService
             using (var c = new OmertexTicketsDBEntities())
             {
                 var temp = c.Ticket
-                    .Include(x => x.SpecifiedVoyage)
                     .Include(x => x.SpecifiedVoyage.BusstopArrival)
                     .Include(x => x.SpecifiedVoyage.BusstopDeparture)
                     .Where(x => x.Id_User.Contains(userId)).Where(x => x.Id_Status == 2).ToList();
+                foreach (var element in temp)
+                {
+                    element.SpecifiedVoyage.Ticket = null;
+                }
                 return temp?.Select(x => new TicketDto(x)).ToList();
             }
         }

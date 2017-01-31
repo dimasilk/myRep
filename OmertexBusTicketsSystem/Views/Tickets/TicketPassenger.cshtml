@@ -1,0 +1,44 @@
+﻿@model OmertexBusTicketsSystem.ViewModels.UsersTicketsViewModel
+
+@{
+    ViewBag.Title = "TicketPassenger";
+}
+
+<h2>TicketPassenger</h2>
+
+@using (Html.BeginForm("BuyTickets", "Tickets"))
+{
+    <table width="100%">
+        <thead> </thead>
+        <td>Info about ticket</td><td>Enter data about passenger</td>
+
+        @for (int i = 0; i < Model.ReservedTickets.TicketAdvanced.Count; i++)
+        {
+            <tr>
+                <td>
+                    Specified voyage name: @Model.ReservedTickets.TicketAdvanced[i].VoyageName <br/>
+                    Departure datetime: @Model.ReservedTickets.TicketAdvanced[i].DepartureDateTime<br/>
+                    Departure Bus Stop: @Model.ReservedTickets.TicketAdvanced[i].BusStopDepartureName<br/>
+                    Arrival datetime: @Model.ReservedTickets.TicketAdvanced[i].ArrivaDateTime<br/>
+                    Arrival Bus Stop: @Model.ReservedTickets.TicketAdvanced[i].BusStopArrivalName<br/>
+                    Seat number: @Model.ReservedTickets.TicketAdvanced[i].SeatNumber.ToString()<br/>
+                    Ticket cost: @Model.ReservedTickets.TicketAdvanced[i].TicketCost.ToString()<br/>
+                </td>
+                <td>
+                    @Html.TextBoxFor(m => Model.ReservedTickets.TicketAdvanced[i].PassengerViewModel.Firstame)
+                    @Html.TextBoxFor(m => Model.ReservedTickets.TicketAdvanced[i].PassengerViewModel.Surname)
+                    @Html.TextBoxFor(m => Model.ReservedTickets.TicketAdvanced[i].PassengerViewModel.DocumentNumber)
+                    @Html.TextBoxFor(m => Model.ReservedTickets.TicketAdvanced[i].PassengerViewModel.Birthdate, new { @class = "form-control" })
+                    
+
+                </td>
+            </tr>
+        }
+        <tr>
+            <td>
+                <input type="submit" value="Submit"/>
+            </td>
+        </tr>
+
+    </table>
+}

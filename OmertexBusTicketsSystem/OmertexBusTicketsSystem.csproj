@@ -398,8 +398,8 @@
     <Content Include="Views\Common\Common.cshtml" />
     <Content Include="Views\Voyage\ApplyFilter.cshtml" />
     <Content Include="Views\Voyage\ReserveTickets.cshtml" />
-    <Content Include="Views\Tickets\Edit.cshtml" />
     <Content Include="Views\Tickets\MyTickets.cshtml" />
+    <Content Include="Views\Tickets\TicketPassenger.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

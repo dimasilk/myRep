@@ -66,7 +66,6 @@ namespace OmertexBusTicketsSystem.ViewModelsFactories
                     SeatNumber = dto.SeatNumber,
                     ArrivaDateTime = (DateTime)dto.Voyage.ArrivalDateTime,
                     DepartureDateTime = (DateTime)dto.Voyage.DepartureDateTime,
-                    Status = dto.Status.Name,
                     VoyageName = dto.Voyage.VoyageName,
                     BusStopArrivalName = dto.Voyage.BusStopArrival.Name,
                     BusStopDepartureName = dto.Voyage.BusStopArrival.Name,
@@ -74,5 +73,6 @@ namespace OmertexBusTicketsSystem.ViewModelsFactories
                     PassengerViewModel = passengerViewModel
                 };
         }
+
     }
 }

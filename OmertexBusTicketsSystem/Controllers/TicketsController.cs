@@ -62,11 +62,11 @@ namespace OmertexBusTicketsSystem.Controllers
             List<TickedAdvancedViewModel> reservedTickets = new List<TickedAdvancedViewModel>();
             List<TickedAdvancedViewModel> boughtTickets = new List<TickedAdvancedViewModel>();
 
-            foreach (var element in boughtTicketsDto)
+            foreach (var element in reservedTicketsDto)
             {
                 reservedTickets.Add(_ticketsFactory.GetAdvanced(element));
             }
-            foreach (var element in reservedTicketsDto)
+            foreach (var element in boughtTicketsDto)
             {
                 boughtTickets.Add(_ticketsFactory.GetAdvanced(element));
             }
@@ -76,10 +76,28 @@ namespace OmertexBusTicketsSystem.Controllers
 
             return View(model);
         }
+       
+
+        public ActionResult TicketPassenger(UsersTicketsViewModel usersTickets)
+        {
+            List<TickedAdvancedViewModel> temp = new List<TickedAdvancedViewModel>();
+            foreach (var element in usersTickets.ReservedTickets.TicketAdvanced)
+            {
+                if (element.Checked == true)
+                {
+                    element.PassengerViewModel = new PassengerViewModel();
+                    temp.Add(element);  
+                }
+            }
+            usersTickets.ReservedTickets.TicketAdvanced = temp;
+            usersTickets.BoughtTickets = null;
+
+            return View(usersTickets);
+        }
 
         // POST: Tickets/Edit/5
         [HttpPost]
-        public ActionResult MyTickets(TicketsContainerViewModel containerViewModel, FormCollection collection)
+        public ActionResult BuyTickets(UsersTicketsViewModel usersTicketsViewModel)
         {
             try
             {

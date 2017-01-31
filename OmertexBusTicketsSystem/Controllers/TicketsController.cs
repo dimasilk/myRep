@@ -13,9 +13,9 @@ namespace OmertexBusTicketsSystem.Controllers
 {
     public class TicketsController : Controller
     {
-        private ITicketService _ticketService;
-        private ITicketsFactory _ticketsFactory;
-        private IPassengerFactory _passengerFactory;
+        private readonly ITicketService _ticketService;
+        private readonly ITicketsFactory _ticketsFactory;
+        private readonly IPassengerFactory _passengerFactory;
         public TicketsController() { }
 
         public TicketsController(ITicketService ticketService, ITicketsFactory ticketsFactory, IPassengerFactory passengerFactory)
@@ -54,7 +54,7 @@ namespace OmertexBusTicketsSystem.Controllers
         }
 
         // GET: Tickets/Edit/5
-        public ActionResult MyTickets(int id)
+        public ActionResult MyTickets()
         {
             string userId = User.Identity.GetUserId();
             var reservedTicketsDto = _ticketService.GetReservedTicketsByUser(userId);

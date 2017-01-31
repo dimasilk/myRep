@@ -9,7 +9,7 @@ using OmertexBusTicketsSystem.BL.Interfaces;
 
 namespace OmertexBusTicketsSystem.BL.PassengerService
 {
-    class PassengerService : IPassengerService
+    public class PassengerService : IPassengerService
     {
         public PassengerDto GetPassengerById(int id)
         {

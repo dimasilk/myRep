@@ -12,6 +12,7 @@ using OmertexBusTicketsSystem.BL.Interfaces;
 using OmertexBusTicketsSystem.BL.TicketService;
 using OmertexBusTicketsSystem.BL.VoyageService;
 using OmertexBusTicketsSystem.BL.OrderService;
+using OmertexBusTicketsSystem.BL.PassengerService;
 using OmertexBusTicketsSystem.ViewModelsFactories;
 using OmertexBusTicketsSystem.ViewModelsFactories.Interdaces;
 
@@ -44,6 +45,10 @@ namespace WebApplication10.Infrastructure
             kernel.Bind<ITicketsFactory>().To<TicketsFactory>();
             kernel.Bind<ITicketService>().To<TicketService>();
             kernel.Bind<IOrderService>().To<OrderService>();
+            kernel.Bind<IPassengerFactory>().To<PassengersFactory>();
+            kernel.Bind<IPassengerService>().To<PassengerService>();
+            kernel.Bind<IOrderService>().To<OrderService>();
+
 
         }
     }

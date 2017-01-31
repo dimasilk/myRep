@@ -1,0 +1,80 @@
+﻿@model OmertexBusTicketsSystem.ViewModels.UsersTicketsViewModel
+
+@{
+    ViewBag.Title = "MyTickets";
+}
+
+<h2>MyTickets</h2>
+
+@using (Html.BeginForm("MyTickets", "Tickets"))
+{<table class="table">
+     <tr>
+         <th>Reserved tickets</th>
+     </tr>
+
+     @for (int i = 0; i < Model.ReservedTickets.TicketAdvanced.Count; i++)
+     {
+         <tr>
+             <td>
+
+                 @Model.ReservedTickets.TicketAdvanced[i].VoyageName <br/>
+                 @Model.ReservedTickets.TicketAdvanced[i].DepartureDateTime<br/>
+                 @Model.ReservedTickets.TicketAdvanced[i].BusStopDepartureName<br/>
+                 @Model.ReservedTickets.TicketAdvanced[i].ArrivaDateTime<br/>
+                 @Model.ReservedTickets.TicketAdvanced[i].BusStopArrivalName<br/>
+                 @Model.ReservedTickets.TicketAdvanced[i].SeatNumber.ToString()<br/>
+                 @Model.ReservedTickets.TicketAdvanced[i].TicketCost.ToString()<br/>
+                 @Html.HiddenFor(m => Model.ReservedTickets.TicketAdvanced[i].Id)<br/>
+             </td>
+             <td>
+                 @Html.CheckBoxFor(m => Model.ReservedTickets.TicketAdvanced[i].Checked)
+
+             </td>
+         </tr>
+     }
+     <tr>
+         <td>
+             <input type="submit" value="By tickets"/>
+         </td>
+     </tr>
+     }
+
+ </table>
+    <br/><br/><br/>
+
+    <table class="table">
+        <tr>
+            <th>Reserved tickets</th>
+        </tr>
+
+        @for (int i = 0; i < Model.BoughtTickets.TicketAdvanced.Count; i++)
+        {
+            <tr>
+                <td>
+
+                    @Model.BoughtTickets.TicketAdvanced[i].VoyageName <br />
+                    @Model.BoughtTickets.TicketAdvanced[i].DepartureDateTime<br />
+                    @Model.BoughtTickets.TicketAdvanced[i].BusStopDepartureName<br />
+                    @Model.BoughtTickets.TicketAdvanced[i].ArrivaDateTime<br />
+                    @Model.BoughtTickets.TicketAdvanced[i].BusStopArrivalName<br />
+                    @Model.BoughtTickets.TicketAdvanced[i].SeatNumber.ToString()<br />
+                    @Model.BoughtTickets.TicketAdvanced[i].TicketCost.ToString()<br />
+                </td>
+                <td>
+                    @Model.BoughtTickets.TicketAdvanced[i].PassengerViewModel.Firstame<br/>
+                    @Model.BoughtTickets.TicketAdvanced[i].PassengerViewModel.Surname<br/>
+                    @Model.BoughtTickets.TicketAdvanced[i].PassengerViewModel.Birthdate<br/>
+                    @Model.BoughtTickets.TicketAdvanced[i].PassengerViewModel.DocumentNumber<br/>
+
+                </td>
+            </tr>
+        }
+        <tr>
+            <td>
+                <input type="submit" value="Submit" />
+            </td>
+        </tr>
+        }
+
+    </table>
+}

@@ -237,14 +237,18 @@
     <Compile Include="Startup.cs" />
     <Compile Include="ViewModelsFactories\BusStopsFactory.cs" />
     <Compile Include="ViewModelsFactories\Interdaces\IBusStopsFactory.cs" />
+    <Compile Include="ViewModelsFactories\Interdaces\IPassengerFactory.cs" />
     <Compile Include="ViewModelsFactories\Interdaces\ITicketsFactory.cs" />
     <Compile Include="ViewModelsFactories\Interdaces\IVoyagesFactory.cs" />
+    <Compile Include="ViewModelsFactories\PassengersFactory.cs" />
     <Compile Include="ViewModelsFactories\TicketsFactory.cs" />
     <Compile Include="ViewModelsFactories\VoyagesFactory.cs" />
     <Compile Include="ViewModels\BusStopModel.cs" />
+    <Compile Include="ViewModels\PassengerViewModel.cs" />
     <Compile Include="ViewModels\TickedAdvancedViewModel.cs" />
     <Compile Include="ViewModels\TicketsContainerViewModel.cs" />
     <Compile Include="ViewModels\TicketSimpleViewModel.cs" />
+    <Compile Include="ViewModels\UsersTicketsViewModel.cs" />
     <Compile Include="ViewModels\VoyageViewModel.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -395,6 +399,7 @@
     <Content Include="Views\Voyage\ApplyFilter.cshtml" />
     <Content Include="Views\Voyage\ReserveTickets.cshtml" />
     <Content Include="Views\Tickets\Edit.cshtml" />
+    <Content Include="Views\Tickets\MyTickets.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

@@ -11,8 +11,10 @@ namespace OmertexBusTicketsSystem.ViewModelsFactories.Interdaces
     public interface ITicketsFactory
     {
         TicketSimpleViewModel GetSimple(TicketDto dto);
-        TickedAdvancedViewModel GetAdvanced(TicketDto dto);
+        TickedAdvancedViewModel GetAdvanced(TicketDto dto, PassengerViewModel passengerViewModel = null);
         TicketsContainerViewModel GetModels(List<TicketSimpleViewModel> simpleViewModels);
+        TicketsContainerViewModel GetModels(List<TickedAdvancedViewModel> simpleViewModels);
         TicketDto GeTicketDto(TicketSimpleViewModel simpleViewModel);
+        UsersTicketsViewModel GetAllUsersTickets(TicketsContainerViewModel reserved, TicketsContainerViewModel bought);
     }
 }

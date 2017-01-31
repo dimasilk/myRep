@@ -4,15 +4,25 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using Microsoft.AspNet.Identity;
+using OmertexBusTicketsSystem.BL.Interfaces;
+using OmertexBusTicketsSystem.ViewModels;
+using OmertexBusTicketsSystem.ViewModelsFactories.Interdaces;
+using WebGrease.Css;
 
 namespace OmertexBusTicketsSystem.Controllers
 {
     public class TicketsController : Controller
     {
-        public ActionResult MyTickets()
+        private ITicketService _ticketService;
+        private ITicketsFactory _ticketsFactory;
+        private IPassengerFactory _passengerFactory;
+        public TicketsController() { }
+
+        public TicketsController(ITicketService ticketService, ITicketsFactory ticketsFactory, IPassengerFactory passengerFactory)
         {
-            User.Identity.GetUserId();
-            return View();
+            _ticketsFactory = ticketsFactory;
+            _ticketService = ticketService;
+            _passengerFactory = passengerFactory;
         }
 
         // GET: Tickets/Details/5
@@ -44,20 +54,38 @@ namespace OmertexBusTicketsSystem.Controllers
         }
 
         // GET: Tickets/Edit/5
-        public ActionResult Edit(int id)
+        public ActionResult MyTickets(int id)
         {
-            return View();
+            string userId = User.Identity.GetUserId();
+            var reservedTicketsDto = _ticketService.GetReservedTicketsByUser(userId);
+            var boughtTicketsDto = _ticketService.GetBoughtTicketsByUser(userId);
+            List<TickedAdvancedViewModel> reservedTickets = new List<TickedAdvancedViewModel>();
+            List<TickedAdvancedViewModel> boughtTickets = new List<TickedAdvancedViewModel>();
+
+            foreach (var element in boughtTicketsDto)
+            {
+                reservedTickets.Add(_ticketsFactory.GetAdvanced(element));
+            }
+            foreach (var element in reservedTicketsDto)
+            {
+                boughtTickets.Add(_ticketsFactory.GetAdvanced(element));
+            }
+            var boughtTicketsContainer = _ticketsFactory.GetModels(boughtTickets);
+            var reservedTicketsContainer = _ticketsFactory.GetModels(reservedTickets);
+            var model = _ticketsFactory.GetAllUsersTickets(reservedTicketsContainer, boughtTicketsContainer);
+
+            return View(model);
         }
 
         // POST: Tickets/Edit/5
         [HttpPost]
-        public ActionResult Edit(int id, FormCollection collection)
+        public ActionResult MyTickets(TicketsContainerViewModel containerViewModel, FormCollection collection)
         {
             try
             {
                 // TODO: Add update logic here
 
-                return RedirectToAction("Index");
+                return RedirectToAction("MyTickets");
             }
             catch
             {

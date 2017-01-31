@@ -13,7 +13,8 @@ namespace OmertexBusTicketsSystem.BL.Interfaces
         void DeleteTicket(int ticketId);
         void UpdateTicket(TicketDto ticketDto);
         void AddTicket(TicketDto ticketDto);
-        IEnumerable<TicketDto> GetTicketsByUser(string userId);
+        IEnumerable<TicketDto> GetReservedTicketsByUser(string userId);
+        IEnumerable<TicketDto> GetBoughtTicketsByUser(string userId);
         IEnumerable<TicketDto> GetFreeTicketsByVoyageId(int voyageId);
         void ReserveTickets(List<TicketDto> list, string userId);
         int GetVoyageIdByTicketId(int ticketId);

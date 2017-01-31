@@ -1,8 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using System.Data.Entity;
 using OmertexBusTicketsSystem.BL.DataModel;
 using OmertexBusTicketsSystem.BL.DTO;
 using OmertexBusTicketsSystem.BL.Interfaces;
@@ -49,9 +48,32 @@ namespace OmertexBusTicketsSystem.BL.TicketService
             throw new NotImplementedException();
         }
 
-        public IEnumerable<TicketDto> GetTicketsByUser(string userId)
+        public IEnumerable<TicketDto> GetReservedTicketsByUser(string userId)
         {
-            throw new NotImplementedException();
+            using (var c = new OmertexTicketsDBEntities())
+            {
+                var temp = c.Ticket
+                    .Include(x => x.SpecifiedVoyage)
+                    .Include(x => x.SpecifiedVoyage.BusstopArrival)
+                    .Include(x => x.SpecifiedVoyage.BusstopDeparture)
+                    .Where(x => x.Id_User.Contains(userId)).Where(x => x.Id_Status == 2).ToList();
+                return temp?.Select(x => new TicketDto(x)).ToList();
+            }
+        }
+
+
+        public IEnumerable<TicketDto> GetBoughtTicketsByUser(string userId)
+        {
+            using (var c = new OmertexTicketsDBEntities())
+            {
+                var temp = c.Ticket
+                    .Include(x => x.Passenger)
+                    .Include(x => x.SpecifiedVoyage)
+                    .Include(x => x.SpecifiedVoyage.BusstopArrival)
+                    .Include(x => x.SpecifiedVoyage.BusstopDeparture)
+                    .Where(x => x.Id_User.Contains(userId)).Where(x => x.Id_Status == 3).ToList();
+                return temp?.Select(x => new TicketDto(x)).ToList();
+            }
         }
 
         public IEnumerable<TicketDto> GetFreeTicketsByVoyageId(int voyageId)

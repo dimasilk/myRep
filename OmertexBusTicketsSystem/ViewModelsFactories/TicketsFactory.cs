@@ -25,6 +25,10 @@ namespace OmertexBusTicketsSystem.ViewModelsFactories
         {
             return new TicketsContainerViewModel() {TicketSimple = simpleViewModels};
         }
+        public TicketsContainerViewModel GetModels(List<TickedAdvancedViewModel> advancedViewModels)
+        {
+            return new TicketsContainerViewModel() { TicketAdvanced = advancedViewModels };
+        }
 
         public TicketDto GeTicketDto(TicketSimpleViewModel simpleViewModel)
         {
@@ -34,8 +38,27 @@ namespace OmertexBusTicketsSystem.ViewModelsFactories
             };
         }
 
-        public TickedAdvancedViewModel GetAdvanced(TicketDto dto)
+        public UsersTicketsViewModel GetAllUsersTickets(TicketsContainerViewModel reserved, TicketsContainerViewModel bought)
         {
+            return new UsersTicketsViewModel()
+            {
+                BoughtTickets = bought,
+                ReservedTickets = reserved
+            };
+        }
+
+        public TicketDto GeTicketDto(TickedAdvancedViewModel advancedViewModel, PassengerDto passengerDto)
+        {
+            return new TicketDto()
+            {
+                Id = advancedViewModel.Id,
+                Passenger = passengerDto
+            };
+        }
+
+        public TickedAdvancedViewModel GetAdvanced(TicketDto dto, PassengerViewModel passengerViewModel = null)
+        {
+            
                 return new TickedAdvancedViewModel()
                 {
                     Id = dto.Id,
@@ -45,8 +68,10 @@ namespace OmertexBusTicketsSystem.ViewModelsFactories
                     DepartureDateTime = (DateTime)dto.Voyage.DepartureDateTime,
                     Status = dto.Status.Name,
                     VoyageName = dto.Voyage.VoyageName,
-                    //BusStopArrivalName = dto.Voyage.
-                    //BusStopDepartureName = 
+                    BusStopArrivalName = dto.Voyage.BusStopArrival.Name,
+                    BusStopDepartureName = dto.Voyage.BusStopArrival.Name,
+                    TicketCost = dto.Voyage.TicketCost.Value,
+                    PassengerViewModel = passengerViewModel
                 };
         }
     }

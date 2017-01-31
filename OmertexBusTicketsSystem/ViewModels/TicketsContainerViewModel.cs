@@ -8,5 +8,6 @@ namespace OmertexBusTicketsSystem.ViewModels
     public class TicketsContainerViewModel
     {
         public List<TicketSimpleViewModel> TicketSimple { get; set; }
+        public List<TickedAdvancedViewModel> TicketAdvanced { get; set; }
     }
 }

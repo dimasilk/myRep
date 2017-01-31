@@ -7,15 +7,18 @@ namespace OmertexBusTicketsSystem.ViewModels
 {
     public class TickedAdvancedViewModel
     {
-        public int Id;
-        public string Info;
-        public int SeatNumber;
-        //passengerViewModel
-        public string Status;
-        public string VoyageName;
-        public DateTime ArrivaDateTime;
-        public DateTime DepartureDateTime;
-        public string BusStopArrivalName;
-        public string BusStopDepartureName;
+        public int Id { get; set; }
+        public string Info { get; set; }
+        public int SeatNumber { get; set; }
+        public bool Checked { get; set; }
+
+        public string Status { get; set; }
+        public string VoyageName { get; set; }
+        public DateTime ArrivaDateTime { get; set; }
+        public DateTime DepartureDateTime { get; set; }
+        public string BusStopArrivalName { get; set; }
+        public string BusStopDepartureName { get; set; }
+        public int TicketCost { get; set; }
+        public PassengerViewModel PassengerViewModel { get; set; }
     }
 }

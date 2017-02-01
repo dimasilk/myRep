@@ -23,6 +23,7 @@
                     Arrival Bus Stop: @Model.ReservedTickets.TicketAdvanced[i].BusStopArrivalName<br/>
                     Seat number: @Model.ReservedTickets.TicketAdvanced[i].SeatNumber.ToString()<br/>
                     Ticket cost: @Model.ReservedTickets.TicketAdvanced[i].TicketCost.ToString()<br/>
+                    @Html.HiddenFor(m => Model.ReservedTickets.TicketAdvanced[i].Id)<br />
                 </td>
                 <td>
                     @Html.TextBoxFor(m => Model.ReservedTickets.TicketAdvanced[i].PassengerViewModel.Firstame)

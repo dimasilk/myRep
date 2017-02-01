@@ -10,6 +10,13 @@ namespace OmertexBusTicketsSystem.BL.TicketService
 {
     public class TicketService : ITicketService
     {
+        private readonly IPassengerService _passengerService;
+        public TicketService() { }
+
+        public TicketService(IPassengerService passengerService)
+        {
+            _passengerService = passengerService;
+        }
         public TicketDto GetTicketById(int id)
         {
             using (var c = new OmertexTicketsDBEntities())
@@ -75,6 +82,10 @@ namespace OmertexBusTicketsSystem.BL.TicketService
                     .Include(x => x.SpecifiedVoyage.BusstopArrival)
                     .Include(x => x.SpecifiedVoyage.BusstopDeparture)
                     .Where(x => x.Id_User.Contains(userId)).Where(x => x.Id_Status == 3).ToList();
+                foreach (var element in temp)
+                {
+                    element.SpecifiedVoyage.Ticket = null;
+                }
                 return temp?.Select(x => new TicketDto(x)).ToList();
             }
         }
@@ -99,6 +110,28 @@ namespace OmertexBusTicketsSystem.BL.TicketService
                 ticket.Status.Name = "Reserved";
                 ticket.UserId = userId;
                 UpdateTicket(ticket);
+            }
+        }
+
+        public void BuyTickets(List<TicketDto> list)
+        {
+            using (var c = new OmertexTicketsDBEntities())
+            {
+                foreach (var element in list)
+                {
+                    Passenger dataModel = new Passenger();
+                    element.Passenger.CopyTo(dataModel);
+                    c.Passenger.Add(dataModel);
+                    c.SaveChanges();
+
+                    var ticket = GetTicketById(element.Id);
+                    ticket.Status.Id = 3;
+                    ticket.Passenger = new PassengerDto(dataModel);
+                    ticket.Passenger.IdUserCreated = ticket.UserId;
+                    UpdateTicket(ticket);
+                    ;
+                    // _passengerService.AddPassenger(ticket.Passenger);
+                }
             }
         }
 

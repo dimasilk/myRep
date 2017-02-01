@@ -54,7 +54,7 @@
 
     </table>
 }
-    <br/><br/><br/>
+    <br/>
 
     <table class="table">
         <th>Bought tickets</th>
@@ -68,21 +68,22 @@
         {
             <tr>
                 <td>
+                    Specified voyage name: @Html.LabelFor(m => Model.BoughtTickets.TicketAdvanced[i].VoyageName, Model.BoughtTickets.TicketAdvanced[i].VoyageName)<br />
+                    Departure datetime: @Html.LabelFor(m => Model.BoughtTickets.TicketAdvanced[i].DepartureDateTime, Model.BoughtTickets.TicketAdvanced[i].DepartureDateTime)<br />
+                    Departure Bus Stop: @Html.LabelFor(m => Model.BoughtTickets.TicketAdvanced[i].BusStopDepartureName, Model.BoughtTickets.TicketAdvanced[i].BusStopDepartureName)<br />
+                    Arrival datetime: @Html.LabelFor(m => Model.BoughtTickets.TicketAdvanced[i].ArrivaDateTime, Model.BoughtTickets.TicketAdvanced[i].ArrivaDateTime)<br />
+                    Arrival Bus Stop: @Html.LabelFor(m => Model.BoughtTickets.TicketAdvanced[i].BusStopArrivalName, Model.BoughtTickets.TicketAdvanced[i].BusStopArrivalName)<br />
 
-                    @Model.BoughtTickets.TicketAdvanced[i].VoyageName <br />
-                    @Model.BoughtTickets.TicketAdvanced[i].DepartureDateTime<br />
-                    @Model.BoughtTickets.TicketAdvanced[i].BusStopDepartureName<br />
-                    @Model.BoughtTickets.TicketAdvanced[i].ArrivaDateTime<br />
-                    @Model.BoughtTickets.TicketAdvanced[i].BusStopArrivalName<br />
-                    @Model.BoughtTickets.TicketAdvanced[i].SeatNumber.ToString()<br />
-                    @Model.BoughtTickets.TicketAdvanced[i].TicketCost.ToString()<br />
+                    Seat number: @Html.LabelFor(m => Model.BoughtTickets.TicketAdvanced[i].SeatNumber, Model.BoughtTickets.TicketAdvanced[i].SeatNumber.ToString())<br />
+                    Ticket cost: @Html.LabelFor(m => Model.BoughtTickets.TicketAdvanced[i].TicketCost, Model.BoughtTickets.TicketAdvanced[i].TicketCost.ToString())<br />
+                   
                 </td>
                 <td>
-                    @Model.BoughtTickets.TicketAdvanced[i].PassengerViewModel.Firstame<br/>
-                    @Model.BoughtTickets.TicketAdvanced[i].PassengerViewModel.Surname<br/>
-                    @Model.BoughtTickets.TicketAdvanced[i].PassengerViewModel.Birthdate<br/>
-                    @Model.BoughtTickets.TicketAdvanced[i].PassengerViewModel.DocumentNumber<br/>
-
+                    Passenger's Firstname: @Html.LabelFor(m => Model.BoughtTickets.TicketAdvanced[i].PassengerViewModel.Firstame, Model.BoughtTickets.TicketAdvanced[i].PassengerViewModel.Firstame)<br/>
+                    Passenger's Surname: @Html.LabelFor(m => Model.BoughtTickets.TicketAdvanced[i].PassengerViewModel.Surname, Model.BoughtTickets.TicketAdvanced[i].PassengerViewModel.Surname)<br/>
+                    Passenger's Birthdate: @Html.LabelFor(m => Model.BoughtTickets.TicketAdvanced[i].PassengerViewModel.Birthdate, Model.BoughtTickets.TicketAdvanced[i].PassengerViewModel.Birthdate)
+                    Passenger's document number:@Html.LabelFor(m => Model.BoughtTickets.TicketAdvanced[i].PassengerViewModel.DocumentNumber, Model.BoughtTickets.TicketAdvanced[i].PassengerViewModel.DocumentNumber)
+                   
                 </td>
             </tr>
         }

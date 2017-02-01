@@ -4,6 +4,7 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using Microsoft.AspNet.Identity;
+using OmertexBusTicketsSystem.BL.DTO;
 using OmertexBusTicketsSystem.BL.Interfaces;
 using OmertexBusTicketsSystem.ViewModels;
 using OmertexBusTicketsSystem.ViewModelsFactories.Interdaces;
@@ -16,13 +17,15 @@ namespace OmertexBusTicketsSystem.Controllers
         private readonly ITicketService _ticketService;
         private readonly ITicketsFactory _ticketsFactory;
         private readonly IPassengerFactory _passengerFactory;
+        private readonly IPassengerService _passengerService;
         public TicketsController() { }
 
-        public TicketsController(ITicketService ticketService, ITicketsFactory ticketsFactory, IPassengerFactory passengerFactory)
+        public TicketsController(ITicketService ticketService, ITicketsFactory ticketsFactory, IPassengerFactory passengerFactory, IPassengerService passengerService)
         {
             _ticketsFactory = ticketsFactory;
             _ticketService = ticketService;
             _passengerFactory = passengerFactory;
+            _passengerService = passengerService;
         }
 
         // GET: Tickets/Details/5
@@ -69,6 +72,7 @@ namespace OmertexBusTicketsSystem.Controllers
             foreach (var element in boughtTicketsDto)
             {
                 boughtTickets.Add(_ticketsFactory.GetAdvanced(element));
+                boughtTickets.Last().PassengerViewModel = _passengerFactory.Get(element.Passenger);
             }
             var boughtTicketsContainer = _ticketsFactory.GetModels(boughtTickets);
             var reservedTicketsContainer = _ticketsFactory.GetModels(reservedTickets);
@@ -85,7 +89,7 @@ namespace OmertexBusTicketsSystem.Controllers
             {
                 if (element.Checked == true)
                 {
-                    element.PassengerViewModel = new PassengerViewModel();
+                    //element.PassengerViewModel = new PassengerViewModel();
                     temp.Add(element);  
                 }
             }
@@ -101,7 +105,13 @@ namespace OmertexBusTicketsSystem.Controllers
         {
             try
             {
-                // TODO: Add update logic here
+                List<TicketDto> tickets = new List<TicketDto>();
+                foreach (var element in usersTicketsViewModel.ReservedTickets.TicketAdvanced)
+                {
+                    tickets.Add(_ticketsFactory.GeTicketDto(element));
+                    tickets.Last().Passenger = _passengerFactory.Get(element.PassengerViewModel);
+                }
+                _ticketService.BuyTickets(tickets);
 
                 return RedirectToAction("MyTickets");
             }

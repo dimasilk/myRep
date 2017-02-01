@@ -38,6 +38,14 @@ namespace OmertexBusTicketsSystem.ViewModelsFactories
             };
         }
 
+        public TicketDto GeTicketDto(TickedAdvancedViewModel simpleViewModel)
+        {
+            return new TicketDto()
+            {
+                Id = simpleViewModel.Id
+            };
+        }
+
         public UsersTicketsViewModel GetAllUsersTickets(TicketsContainerViewModel reserved, TicketsContainerViewModel bought)
         {
             return new UsersTicketsViewModel()

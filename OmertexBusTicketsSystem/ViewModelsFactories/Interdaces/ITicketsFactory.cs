@@ -15,6 +15,7 @@ namespace OmertexBusTicketsSystem.ViewModelsFactories.Interdaces
         TicketsContainerViewModel GetModels(List<TicketSimpleViewModel> simpleViewModels);
         TicketsContainerViewModel GetModels(List<TickedAdvancedViewModel> simpleViewModels);
         TicketDto GeTicketDto(TicketSimpleViewModel simpleViewModel);
+        TicketDto GeTicketDto(TickedAdvancedViewModel simpleViewModel);
         UsersTicketsViewModel GetAllUsersTickets(TicketsContainerViewModel reserved, TicketsContainerViewModel bought);
     }
 }

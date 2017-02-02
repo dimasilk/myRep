@@ -81,8 +81,8 @@
                 <td>
                     Passenger's Firstname: @Html.LabelFor(m => Model.BoughtTickets.TicketAdvanced[i].PassengerViewModel.Firstame, Model.BoughtTickets.TicketAdvanced[i].PassengerViewModel.Firstame)<br/>
                     Passenger's Surname: @Html.LabelFor(m => Model.BoughtTickets.TicketAdvanced[i].PassengerViewModel.Surname, Model.BoughtTickets.TicketAdvanced[i].PassengerViewModel.Surname)<br/>
-                    Passenger's Birthdate: @Html.LabelFor(m => Model.BoughtTickets.TicketAdvanced[i].PassengerViewModel.Birthdate, Model.BoughtTickets.TicketAdvanced[i].PassengerViewModel.Birthdate)
-                    Passenger's document number:@Html.LabelFor(m => Model.BoughtTickets.TicketAdvanced[i].PassengerViewModel.DocumentNumber, Model.BoughtTickets.TicketAdvanced[i].PassengerViewModel.DocumentNumber)
+                    Passenger's Birthdate: @Html.LabelFor(m => Model.BoughtTickets.TicketAdvanced[i].PassengerViewModel.Birthdate, Model.BoughtTickets.TicketAdvanced[i].PassengerViewModel.Birthdate.Date.ToString())<br />
+                    Passenger's document number:@Html.LabelFor(m => Model.BoughtTickets.TicketAdvanced[i].PassengerViewModel.DocumentNumber, Model.BoughtTickets.TicketAdvanced[i].PassengerViewModel.DocumentNumber)<br />
                    
                 </td>
             </tr>

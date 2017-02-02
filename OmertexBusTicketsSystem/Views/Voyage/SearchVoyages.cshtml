@@ -20,17 +20,18 @@
 
     <br/>
 <p>
-    Departure Stop
+    Select Departure Stop
 
     @Html.DropDownList("idDepartureStop", ViewBag.stops as SelectList)
 </p>
 <p>
-    Arrival Stop
+    Select Arrival Stop
     @Html.DropDownList("idArrivalStop", ViewBag.stops as SelectList)
 </p>
-<input type="datetime" id="from" name="from">
+<br/>
+Enter datetime From: <input type="datetime" id="from" name="from"><br /><br />
 
-<input type="datetime" id="till" name="till">
+Enter datetime Till:  <input type="datetime" id="till" name="till"><br /><br />
 
 <input type='button' id="submit" value='Поиск'/>
 <div id="results"></div>

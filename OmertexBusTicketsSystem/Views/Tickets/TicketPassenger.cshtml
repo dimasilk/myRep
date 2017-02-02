@@ -26,10 +26,10 @@
                     @Html.HiddenFor(m => Model.ReservedTickets.TicketAdvanced[i].Id)<br />
                 </td>
                 <td>
-                    @Html.TextBoxFor(m => Model.ReservedTickets.TicketAdvanced[i].PassengerViewModel.Firstame)
-                    @Html.TextBoxFor(m => Model.ReservedTickets.TicketAdvanced[i].PassengerViewModel.Surname)
-                    @Html.TextBoxFor(m => Model.ReservedTickets.TicketAdvanced[i].PassengerViewModel.DocumentNumber)
-                    @Html.TextBoxFor(m => Model.ReservedTickets.TicketAdvanced[i].PassengerViewModel.Birthdate, new { @class = "form-control" })
+                    Passenger's Firstname: @Html.TextBoxFor(m => Model.ReservedTickets.TicketAdvanced[i].PassengerViewModel.Firstame)<br />
+                    Passenger's Surname :@Html.TextBoxFor(m => Model.ReservedTickets.TicketAdvanced[i].PassengerViewModel.Surname)<br />
+                    Passenger's Document number : @Html.TextBoxFor(m => Model.ReservedTickets.TicketAdvanced[i].PassengerViewModel.DocumentNumber)<br />
+                    Passenger's Birthdate :@Html.TextBoxFor(m => Model.ReservedTickets.TicketAdvanced[i].PassengerViewModel.Birthdate)<br />
                     
 
                 </td>
